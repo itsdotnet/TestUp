@@ -18,8 +18,4 @@
     <ProjectReference Include="..\TestUp.Domain\TestUp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
