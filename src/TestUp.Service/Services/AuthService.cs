@@ -3,10 +3,10 @@ using TestUp.Service.Helpers;
 using System.Security.Claims;
 using TestUp.Service.Interfaces;
 using TestUp.Service.Exceptions;
-using TestUp.DataAccess.IRepositories;
-using Microsoft.Extensions.Configuration;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using TestUp.DataAccess.IRepositories;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
 
 namespace TestUp.Service.Services;
 

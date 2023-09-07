@@ -2,7 +2,7 @@
 
 namespace TestUp.Service.Interfaces;
 
-public interface IUserAnswerInterface
+public interface IUserAnswerService
 {
     Task<bool> DeleteAsync(long id);
     Task<IEnumerable<UserAnswerResultDto>> GetAllAsync();

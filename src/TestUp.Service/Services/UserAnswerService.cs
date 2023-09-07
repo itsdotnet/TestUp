@@ -2,12 +2,10 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TestUp.DataAccess.IRepositories;
 using TestUp.Service.DTOs.UserAnswer;
-using TestUp.Service.Exceptions;
-using TestUp.Service.Interfaces;
 
 namespace TestUp.Service.Services;
 
-public class UserAnswerService:IUserAnswerInterface
+public class UserAnswerService:IUserAnswerService
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;

@@ -1,23 +1,24 @@
 ﻿using AutoMapper;
-using TestUp.DataAccess.IRepositories;
 using TestUp.Domain.Enums;
-using TestUp.Service.DTOs.QuestionPack;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
+using TestUp.DataAccess.IRepositories;
+using TestUp.Service.DTOs.QuestionPack;
 
 namespace TestUp.Service.Services;
+#pragma warning disable CS1998
 
 public class QuestionPackService : IQuestionPackService
 {
-    private readonly IQuestionService _questionService;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IQuestionService _questionService;
 
     public QuestionPackService(IUnitOfWork unitOfWork, IQuestionService questionService, IMapper mapper)
     {
-        _questionService = questionService;
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
+        _questionService = questionService;
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -33,7 +34,6 @@ public class QuestionPackService : IQuestionPackService
         return true;
     }
 
-#pragma warning disable CS1998
     public async Task<IEnumerable<QuestionPack>> GetAllAsync()
     {
         return _unitOfWork.QuestionPackRepository.SelectAll();
