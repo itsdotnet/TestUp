@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TestUp.DataAccess.IRepositories;
 using TestUp.DataAccess.Repositories;
 using TestUp.DataAccess.Repository;
@@ -25,5 +29,28 @@ public static class ServiceCollections
         services.AddScoped<IQuestionPackService, QuestionPackService>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddAutoMapper(typeof(MappingProfile));
+    }
+
+    public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(o =>
+        {
+            var key = Encoding.UTF8.GetBytes(configuration["JWT:Key"]);
+            o.SaveToken = true;
+            o.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = configuration["JWT:Issuer"],
+                ValidAudience = configuration["JWT:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(key)
+            };
+        });
     }
 }
