@@ -71,7 +71,7 @@ public class QuestionsController : BaseController
             Data = await this.questionService.ModifyImageAsync(id, image)
         });
 
-    [HttpGet("get/{userId:long}")]
+    [HttpGet("get-userid/{userId:long}")]
     public async Task<IActionResult> GetByUserIdAsync(long userId)
         => Ok(new Response
         {

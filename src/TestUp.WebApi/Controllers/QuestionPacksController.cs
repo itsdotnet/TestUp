@@ -59,7 +59,7 @@ public class QuestionPacksController : BaseController
             Data = await this.questionPackService.GetByIdAsync(id)
         });
 
-    [HttpGet("get/{examId:long}")]
+    [HttpGet("get-examid/{examId:long}")]
     public async Task<IActionResult> GetByExamIdAsync(long examId)
         => Ok(new Response
         {
