@@ -1,23 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
+﻿using Microsoft.AspNetCore.Routing;
+using System.Text.RegularExpressions;
 
-namespace TestUp.WebApi.Middlewares;
-
-public class LowercaseControllerModelConvention : IControllerModelConvention
+public class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
-    public void ConfigureServices(IServiceCollection services)
+    public string TransformOutbound(object value)
     {
-        services.AddControllersWithViews(options =>
-        {
-            options.Conventions.Add(new LowercaseControllerModelConvention());
-        });
-    }
-
-    public void Apply(ControllerModel controller)
-    {
-        controller.ControllerName = controller.ControllerName.ToLower();
-
-        foreach (var action in controller.Actions)
-            action.ActionName = action.ActionName.ToLower();
+        return value == null ? null : Regex.Replace(value.ToString(), "([a-z])([A-Z])", "$1-$2").ToLower();
     }
 }
