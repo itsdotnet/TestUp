@@ -7,6 +7,7 @@ namespace TestUp.Service.DTOs.UserAnswer;
 
 public class UserAnswerResultDto
 {
+    public long Id { get; set; }
     public UserResultDto User { get; set; }
     public ExamResultDto Exam { get; set; }
     public QuestionResultDto Question { get; set; }
