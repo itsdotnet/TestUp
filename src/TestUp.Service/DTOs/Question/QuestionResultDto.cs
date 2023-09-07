@@ -1,4 +1,5 @@
 ﻿using TestUp.Domain.Enums;
+using TestUp.Service.DTOs.Attachment;
 
 namespace TestUp.Service.DTOs.Question;
 
@@ -8,5 +9,5 @@ public class QuestionResultDto
     public string Title { get; set; }
     public Level Level { get; set; }
     public string Description { get; set; }
-    public long? AttachmentId { get; set; }
+    public AttachmentResultDto Attachment { get; set; }
 }
