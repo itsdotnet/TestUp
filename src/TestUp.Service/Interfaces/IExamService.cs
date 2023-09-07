@@ -13,6 +13,6 @@ public interface IExamService
     Task<IEnumerable<ExamResultDto>> CurrentExams();
     Task<ExamResultDto> ModifyAsync(ExamUpdateDto examUpdate);
     Task<IEnumerable<ExamResultDto>> GetByTitleAsync(string title);
-    Task<ExamResultDto> CreateAsync(AnswerCreationDto answerCreation);
+    Task<ExamResultDto> CreateAsync(ExamCreationDto examCreation);
     Task<IEnumerable<ExamResultDto>> GetByNearExamAsync(DateTime dateTime);
 }
