@@ -48,4 +48,4 @@ We would like to thank the open-source community for their contributions and sup
 
 ## Contact
 
-If you have any questions or feedback, please contact us at [email@example.com](mailto:iskandar.kodirov@icloud.com).
+If you have any questions or feedback, please contact us at [iskandar.kodirov@icloud.com](mailto:iskandar.kodirov@icloud.com).
