@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TestUp.DataAccess.IRepositories;
 using TestUp.Service.DTOs.UserAnswer;
 using TestUp.Service.Exceptions;
@@ -26,7 +27,7 @@ public class UserAnswerService:IUserAnswerInterface
 
     public async Task<IEnumerable<UserAnswerResultDto>> GetAllAsync()
     {
-        var userAnswers = _unitOfWork.UserAnswerRepository.SelectAll();
+        var userAnswers =await _unitOfWork.UserAnswerRepository.SelectAll().ToListAsync();
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(userAnswers);
     }
 
@@ -41,28 +42,25 @@ public class UserAnswerService:IUserAnswerInterface
 
     public async Task<IEnumerable<UserAnswerResultDto>> GetByExamIdAsync(long examId)
     {
-        var existUserAnswer = _unitOfWork.UserAnswerRepository
-                                  .SelectAll(userAnswer => userAnswer.AnswerId == examId)
-                              ?? throw new NotFoundException(message: "UserAnswer is not found!");
+        var existUserAnswer = await _unitOfWork.UserAnswerRepository
+            .SelectAll(userAnswer => userAnswer.AnswerId == examId).ToListAsync();
         
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
     public async Task<IEnumerable<UserAnswerResultDto>> GetByUserIdAsync(long userId)
     {
-        var existUserAnswer = _unitOfWork.UserAnswerRepository
-                                  .SelectAll(userAnswer => userAnswer.AnswerId == userId)
-                              ?? throw new NotFoundException(message: "UserAnswer is not found!");
+        var existUserAnswer = await _unitOfWork.UserAnswerRepository
+            .SelectAll(userAnswer => userAnswer.AnswerId == userId).ToListAsync();
         
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
     public async Task<IEnumerable<UserAnswerResultDto>> GetByAnswerIdAsync(long answerId)
     {
-        var existUserAnswer = _unitOfWork.UserAnswerRepository
-                                  .SelectAll(userAnswer => userAnswer.AnswerId == answerId)
-                              ?? throw new NotFoundException(message: "UserAnswer is not found!");
-
+        var existUserAnswer = await _unitOfWork.UserAnswerRepository
+            .SelectAll(userAnswer => userAnswer.AnswerId == answerId).ToListAsync();
+        
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
@@ -79,6 +77,7 @@ public class UserAnswerService:IUserAnswerInterface
         return _mapper.Map<UserAnswerResultDto>(existUserAnswer);
     }
 
+    #pragma warning disable 
     public async Task<UserAnswerResultDto> CreateAsync(UserAnswerCreationDto userAnswerCreation)
     {
         var existUser = await _unitOfWork.UserRepository

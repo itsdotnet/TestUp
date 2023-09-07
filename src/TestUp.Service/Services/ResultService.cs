@@ -56,6 +56,7 @@ public class ResultService:IResultService
         return _mapper.Map<IEnumerable<ResultResultDto>>(existResults);
     }
 
+    #pragma warning disable
     public async Task<float> MyScore(long userId, long examId)
     {
         throw new NotImplementedException();
