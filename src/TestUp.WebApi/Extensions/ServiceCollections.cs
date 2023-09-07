@@ -26,7 +26,6 @@ public static class ServiceCollections
         services.AddScoped<IQuestionService, QuestionService>();
         services.AddScoped<IResultService, ResultService>();
         services.AddScoped<IUserAnswerService, UserAnswerService>();
-        services.AddScoped<IPermissionService, PermissionService>();
         services.AddScoped<IAttachmentService, AttachmentService>();
         services.AddScoped<IQuestionPackService, QuestionPackService>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

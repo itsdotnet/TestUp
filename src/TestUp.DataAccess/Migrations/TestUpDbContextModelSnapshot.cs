@@ -125,218 +125,6 @@ namespace TestUp.DataAccess.Migrations
                     b.ToTable("Exams");
                 });
 
-            modelBuilder.Entity("Permission", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Create")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("Delete")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Get")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Update")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2281),
-                            Delete = true,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2282)
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2290),
-                            Delete = false,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2291)
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2294),
-                            Delete = true,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2295)
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2299),
-                            Delete = false,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2299)
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2303),
-                            Delete = true,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2304)
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2307),
-                            Delete = false,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2308)
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2311),
-                            Delete = true,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2312)
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2315),
-                            Delete = false,
-                            Get = true,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2316)
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2320),
-                            Delete = true,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2321)
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2324),
-                            Delete = false,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2325)
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2329),
-                            Delete = true,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2329)
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            Create = true,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2333),
-                            Delete = false,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2334)
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2338),
-                            Delete = true,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2339)
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2342),
-                            Delete = false,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = true,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2343)
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2346),
-                            Delete = true,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2347)
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            Create = false,
-                            CreatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2350),
-                            Delete = false,
-                            Get = false,
-                            IsDeleted = false,
-                            Update = false,
-                            UpdatedAt = new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2351)
-                        });
-                });
-
             modelBuilder.Entity("Question", b =>
                 {
                     b.Property<long>("Id")
@@ -474,9 +262,6 @@ namespace TestUp.DataAccess.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<long>("PermissionId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -489,8 +274,6 @@ namespace TestUp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AttachmentId");
-
-                    b.HasIndex("PermissionId");
 
                     b.ToTable("Users");
                 });
@@ -615,15 +398,7 @@ namespace TestUp.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("AttachmentId");
 
-                    b.HasOne("Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Attachment");
-
-                    b.Navigation("Permission");
                 });
 
             modelBuilder.Entity("UserAnswer", b =>

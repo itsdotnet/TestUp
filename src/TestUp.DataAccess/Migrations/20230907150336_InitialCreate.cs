@@ -4,8 +4,6 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace TestUp.DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -52,25 +50,6 @@ namespace TestUp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Get = table.Column<bool>(type: "boolean", nullable: false),
-                    Create = table.Column<bool>(type: "boolean", nullable: false),
-                    Update = table.Column<bool>(type: "boolean", nullable: false),
-                    Delete = table.Column<bool>(type: "boolean", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -83,7 +62,6 @@ namespace TestUp.DataAccess.Migrations
                     Password = table.Column<string>(type: "text", nullable: true),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
                     AttachmentId = table.Column<long>(type: "bigint", nullable: true),
-                    PermissionId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false)
@@ -96,12 +74,6 @@ namespace TestUp.DataAccess.Migrations
                         column: x => x.AttachmentId,
                         principalTable: "Attachments",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Users_Permissions_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permissions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -267,29 +239,6 @@ namespace TestUp.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Permissions",
-                columns: new[] { "Id", "Create", "CreatedAt", "Delete", "Get", "IsDeleted", "Update", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2281), true, true, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2282) },
-                    { 2L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2290), false, true, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2291) },
-                    { 3L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2294), true, true, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2295) },
-                    { 4L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2299), false, true, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2299) },
-                    { 5L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2303), true, true, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2304) },
-                    { 6L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2307), false, true, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2308) },
-                    { 7L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2311), true, true, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2312) },
-                    { 8L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2315), false, true, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2316) },
-                    { 9L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2320), true, false, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2321) },
-                    { 10L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2324), false, false, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2325) },
-                    { 11L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2329), true, false, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2329) },
-                    { 12L, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2333), false, false, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2334) },
-                    { 13L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2338), true, false, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2339) },
-                    { 14L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2342), false, false, false, true, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2343) },
-                    { 15L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2346), true, false, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2347) },
-                    { 16L, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2350), false, false, false, false, new DateTime(2023, 9, 7, 18, 38, 6, 266, DateTimeKind.Utc).AddTicks(2351) }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_AttachmentId",
                 table: "Answers",
@@ -354,11 +303,6 @@ namespace TestUp.DataAccess.Migrations
                 name: "IX_Users_AttachmentId",
                 table: "Users",
                 column: "AttachmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_PermissionId",
-                table: "Users",
-                column: "PermissionId");
         }
 
         /// <inheritdoc />
@@ -387,9 +331,6 @@ namespace TestUp.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Attachments");
-
-            migrationBuilder.DropTable(
-                name: "Permissions");
         }
     }
 }

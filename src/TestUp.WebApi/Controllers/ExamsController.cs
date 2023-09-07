@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TestUp.Service.DTOs.Exam;
@@ -16,6 +17,7 @@ public class ExamsController : BaseController
     }
 
     [HttpPost("create")]
+    [Authorize(Policy = "TeacherPolicy")]
     public async Task<IActionResult> PostAsync(ExamCreationDto examCreation)
         => Ok(new Response
         {

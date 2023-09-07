@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using TestUp.Service.Helpers;
+using TestUp.DataAccess.IRepositories;
 using TestUp.Service.DTOs.User;
 using TestUp.Service.Exceptions;
+using TestUp.Service.Helpers;
 using TestUp.Service.Interfaces;
-using TestUp.Service.DTOs.Permission;
-using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 #pragma warning disable CS1998
@@ -20,40 +19,10 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<UserResultDto> ChangePermissions(long Id, PermissionCreationDto dto)
-    {
-        var exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Id == Id);
-
-        if (exist is null)
-            throw new NotFoundException("User not found");
-
-        var permissions = _unitOfWork.PermissionRepository.SelectAll();
-
-        foreach (var permission in permissions) {
-            if (dto.Create == permission.Create && dto.Update == permission.Update &&
-                dto.Delete == permission.Delete && dto.Get == permission.Get)
-            {
-                dto = null;
-                exist.PermissionId = permission.Id;
-                await _unitOfWork.UserRepository.UpdateAsync(exist);
-                await _unitOfWork.SaveAsync();
-                return _mapper.Map<UserResultDto>(exist);
-            }
-        }
-        var mappedP = _mapper.Map<Permission>(dto);
-        await _unitOfWork.PermissionRepository.AddAsync(mappedP);
-
-        exist.PermissionId = mappedP.Id;
-        await _unitOfWork.UserRepository.UpdateAsync(exist);
-        
-        await _unitOfWork.SaveAsync();
-        return _mapper.Map<UserResultDto>(exist);
-    }
-
     public async Task<bool> CheckUserAsync(string emailOrUsername, string password)
     {
         var user = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == emailOrUsername || x.Username == emailOrUsername);
-        if(password.Verify(user.Password)) // will be change to validator
+        if (password.Verify(user.Password)) // will be change to validator
         {
             return true;
         }
@@ -70,7 +39,7 @@ public class UserService : IUserService
 
 
         var newUser = _mapper.Map<User>(dto);
-        
+
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 

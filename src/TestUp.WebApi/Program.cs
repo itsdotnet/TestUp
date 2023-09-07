@@ -28,6 +28,7 @@ builder.Services.AddServices();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("TeacherPolicy", policy => policy.RequireRole("Teacher"));
     options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
 });
 

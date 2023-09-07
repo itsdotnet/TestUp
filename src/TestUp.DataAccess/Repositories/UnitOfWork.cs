@@ -16,7 +16,6 @@ public class UnitOfWork : IUnitOfWork
         AnswerRepository = new Repository<Answer>(dbContext);
         ResultRepository = new Repository<Result>(dbContext);
         QuestionRepository = new Repository<Question>(dbContext);
-        PermissionRepository = new Repository<Permission>(dbContext);
         UserAnswerRepository = new Repository<UserAnswer>(dbContext);
         AttachmentRepository = new Repository<Attachment>(dbContext);
         QuestionPackRepository = new Repository<QuestionPack>(dbContext);
@@ -28,7 +27,6 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<Result> ResultRepository { get; set; }
     public IRepository<Attachment> AttachmentRepository { get; set; }
     public IRepository<Question> QuestionRepository { get; set; }
-    public IRepository<Permission> PermissionRepository { get; set; }
     public IRepository<UserAnswer> UserAnswerRepository { get; set; }
     public IRepository<QuestionPack> QuestionPackRepository { get; set; }
 
