@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TestUp.WebApi.Middlewares;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,12 +38,12 @@ builder.Logging.AddSerilog(logger);
 
 // Lowercase route
 
-builder.Services.AddControllersWithViews(options =>
+builder.Services.AddControllers(options =>
 {
-    options.Conventions.Add(new LowercaseControllerModelConvention());
+    options.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()));
 });
 
-
+builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -2,5 +2,6 @@
 
 public interface IAuthService
 {
-    Task<string> GenerateTokenAsync(string email, string password);
+    string GetUserIdFromToken(string token);
+    Task<string> GenerateAndCacheTokenAsync(string email, string password);
 }
