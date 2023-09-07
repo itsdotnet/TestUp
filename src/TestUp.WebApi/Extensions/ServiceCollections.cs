@@ -18,8 +18,8 @@ public static class ServiceCollections
     {
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IExamService, ExamService>();
-        services.AddScoped<IUserService/*, UserService*/>();
         services.AddScoped<IAnswerService, AnswerService>();
         services.AddScoped<IQuestionService, QuestionService>();
         services.AddScoped<IResultService/*, ResultService*/>();

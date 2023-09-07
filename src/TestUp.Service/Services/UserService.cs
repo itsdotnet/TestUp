@@ -73,14 +73,20 @@ public class UserService : IUserService
         return _mapper.Map<UserResultDto>(user);
     }
 
-    public Task<IEnumerable<UserResultDto>> GetByName(string name)
+    public async Task<IEnumerable<UserResultDto>> GetByName(string name)
     {
-        throw new NotImplementedException();
+        var users = _unitOfWork.UserRepository.SelectAll(u =>
+            u.Firstname.Contains(name) || u.Lastname.Contains(name));
+
+        return _mapper.Map<IEnumerable<UserResultDto>>(users);
     }
 
-    public Task<IEnumerable<UserResultDto>> GetByUsernameAsync(string username)
+    public async Task<IEnumerable<UserResultDto>> GetByUsernameAsync(string username)
     {
-        throw new NotImplementedException();
+        var users = _unitOfWork.UserRepository
+            .SelectAll(u => u.Username.StartsWith(username.ToLower().Trim()));
+
+        return _mapper.Map<IEnumerable<UserResultDto>>(users);
     }
 
     public async Task<UserResultDto> ModifyAsync(UserUpdateDto dto)

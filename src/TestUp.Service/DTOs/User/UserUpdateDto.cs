@@ -9,5 +9,4 @@ public class UserUpdateDto
     public string Username { get; set; }
     public UserRole UserRole { get; set; }
     public long? AttachmentId { get; set; }
-    public long PermissionId { get; set; }
 }
