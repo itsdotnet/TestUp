@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-
-namespace TestUp.Service.DTOs.Answer;
+﻿namespace TestUp.Service.DTOs.Answer;
 
 public class AnswerCreationDto
 {
