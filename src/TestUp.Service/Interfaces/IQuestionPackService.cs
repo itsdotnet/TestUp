@@ -10,5 +10,5 @@ public interface IQuestionPackService
     Task<IEnumerable<QuestionPack>> GetByExamIdAsync(long examId);
     Task<QuestionPackResultDto> UpdateAsync(QuestionPackUpdateDto questionPack);
     Task<QuestionPackResultDto> CreateAsync(QuestionPackCreationDto questionPack);
-    Task<IEnumerable<QuestionPackResultDto>> ColloctAsync(QuestionPackCollectDto dto);
+    Task<IEnumerable<QuestionPackResultDto>> CollectAsync(QuestionPackCollectDto dto);
 }
