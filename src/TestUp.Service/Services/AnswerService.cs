@@ -1,22 +1,21 @@
-﻿using TestUp.Service.Interfaces;
-using TestUp.DataAccess.IRepositories;
-using TestUp.Service.DTOs.Answer;
-using AutoMapper;
+﻿using AutoMapper;
 using TestUp.Service.Exceptions;
-using System;
-using TestUp.DataAccess.Repository;
+using TestUp.Service.Interfaces;
+using TestUp.Service.DTOs.Answer;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
+#pragma warning disable CS1998
 
 public class AnswerService : IAnswerService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
     public AnswerService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -30,7 +29,6 @@ public class AnswerService : IAnswerService
         return await _unitOfWork.SaveAsync();
     }
 
-    #pragma warning disable CS1998
     public async Task<IEnumerable<Answer>> GetAllAsync()
     {
         return _unitOfWork.AnswerRepository.SelectAll(null, new string[] { "Question", "Attachment" });
@@ -54,7 +52,7 @@ public class AnswerService : IAnswerService
         if (answerUpdate.AttachmentId is not null)
         {
             var existingAttachment = await _unitOfWork.AttachmentRepository.SelectAsync(x => x.Id == answerUpdate.AttachmentId);
-            if(existingAttachment is null)
+            if (existingAttachment is null)
                 throw new NotFoundException("Image not found");
         }
 

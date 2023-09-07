@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using TestUp.Service.Interfaces;
 using TestUp.Service.Exceptions;
-using TestUp.DataAccess.IRepositories;
 using TestUp.Service.DTOs.Permission;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 #pragma warning disable CS1998
 
 public class PermissionService : IPermissionService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
     public PermissionService(IUnitOfWork unitOfWork, IMapper mapper)
     {
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<bool> DeleteAsync(long id)

@@ -5,6 +5,7 @@ namespace TestUp.Service.DTOs.Result;
 
 public class ResultResultDto
 {
+	public long Id { get; set; }
     public UserResultDto User { get; set; }
 
     public ExamResultDto Exam { get; set; }
