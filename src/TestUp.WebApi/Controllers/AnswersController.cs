@@ -59,4 +59,13 @@ public class AnswersController : BaseController
             Message = "Success",
             Data = await this.answerService.GetAllAsync()
         });
+
+    [HttpGet("get-questionid")]
+    public async Task<IActionResult> GetByQuestionId(long id)
+        => Ok(new Response
+        {
+            StatusCode = 200,
+            Message = "Success",
+            Data = await this.answerService.GetByQuestionIdAsync(id)
+        });
 }
