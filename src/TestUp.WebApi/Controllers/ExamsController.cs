@@ -60,7 +60,7 @@ public class ExamsController : BaseController
             Data = await this.examService.GetByIdAsync(id)
         });
 
-    [HttpGet("get/{title:string}")]
+    [HttpGet("get/{title}")]
     public async Task<IActionResult> GetByTitleAsync(string title)
         => Ok(new Response
         {
@@ -69,8 +69,8 @@ public class ExamsController : BaseController
             Data = await this.examService.GetByTitleAsync(title)
         });
 
-    [HttpGet("get/{date:datatime}")]
-    public async Task<IActionResult> GetByNearExamAsync(DateTime dateTime)
+    [HttpGet("get-near")]
+    public async Task<IActionResult> GetByNearExamAsync([FromQuery] DateTime dateTime)
         => Ok(new Response
         {
             StatusCode = 200,
@@ -78,7 +78,7 @@ public class ExamsController : BaseController
             Data = await this.examService.GetByNearExamAsync(dateTime)
         });
 
-    [HttpGet("get-endexam")]
+    [HttpGet("get-ended-exam")]
     public async Task<IActionResult> GetEndExam()
         => Ok(new Response
         {
@@ -87,7 +87,7 @@ public class ExamsController : BaseController
             Data = await this.examService.EndedExams()
         });
 
-    [HttpGet("get-futexam")]
+    [HttpGet("get-future-exam")]
     public async Task<IActionResult> GetFutureExam()
         => Ok(new Response
         {
@@ -96,7 +96,7 @@ public class ExamsController : BaseController
             Data = await this.examService.FutureExams()
         });
 
-    [HttpGet("get-currentxam")]
+    [HttpGet("get-current-exam")]
     public async Task<IActionResult> GetCurrentExam()
         => Ok(new Response
         {

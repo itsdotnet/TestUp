@@ -50,7 +50,7 @@ public class ExamService : IExamService
     public async Task<IEnumerable<ExamResultDto>> EndedExams()
     {
         var now = Time.GetCurrentTime();
-        var endedExams = await _unitOfWork.ExamRepository.SelectAsync(e => e.EndTime < now);
+        var endedExams = _unitOfWork.ExamRepository.SelectAll(e => e.EndTime < now);
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(endedExams);
     }
@@ -58,7 +58,7 @@ public class ExamService : IExamService
     public async Task<IEnumerable<ExamResultDto>> FutureExams()
     {
         var now = Time.GetCurrentTime();
-        var futureExams = await _unitOfWork.ExamRepository.SelectAsync(e => e.StartTime > now);
+        var futureExams = _unitOfWork.ExamRepository.SelectAll(e => e.StartTime > now);
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(futureExams);
     }
@@ -66,7 +66,7 @@ public class ExamService : IExamService
     public async Task<IEnumerable<ExamResultDto>> CurrentExams()
     {
         var now = Time.GetCurrentTime();
-        var currentExams = await _unitOfWork.ExamRepository.SelectAsync(e => e.StartTime <= now && e.EndTime >= now);
+        var currentExams = _unitOfWork.ExamRepository.SelectAll(e => e.StartTime <= now && e.EndTime >= now);
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(currentExams);
     }
@@ -79,7 +79,7 @@ public class ExamService : IExamService
             throw new NotFoundException("Exam not found");
 
         _mapper.Map(examUpdate, existingExam);
-
+        await _unitOfWork.ExamRepository.UpdateAsync(existingExam);
         await _unitOfWork.SaveAsync();
 
         return _mapper.Map<ExamResultDto>(existingExam);
@@ -87,7 +87,7 @@ public class ExamService : IExamService
 
     public async Task<IEnumerable<ExamResultDto>> GetByTitleAsync(string title)
     {
-        var examsWithTitle = await _unitOfWork.ExamRepository.SelectAsync(e => e.Title.Contains(title));
+        var examsWithTitle = _unitOfWork.ExamRepository.SelectAll(e => e.Title.Contains(title));
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(examsWithTitle);
     }
@@ -104,7 +104,7 @@ public class ExamService : IExamService
 
     public async Task<IEnumerable<ExamResultDto>> GetByNearExamAsync(DateTime dateTime)
     {
-        var nearbyExams = await _unitOfWork.ExamRepository.SelectAsync(e => e.StartTime > dateTime.AddDays(-1) && e.StartTime < dateTime.AddDays(1));
+        var nearbyExams = _unitOfWork.ExamRepository.SelectAll(e => e.StartTime > dateTime.AddDays(-1) && e.StartTime < dateTime.AddDays(1)).ToList();
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(nearbyExams);
     }
