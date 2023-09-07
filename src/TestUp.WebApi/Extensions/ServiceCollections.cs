@@ -22,7 +22,7 @@ public static class ServiceCollections
         services.AddScoped<IExamService, ExamService>();
         services.AddScoped<IAnswerService, AnswerService>();
         services.AddScoped<IQuestionService, QuestionService>();
-        services.AddScoped<IResultService/*, ResultService*/>();
+        services.AddScoped<IResultService, ResultService>();
         services.AddScoped<IUserAnswerService, UserAnswerService>();
         services.AddScoped<IPermissionService, PermissionService>();
         services.AddScoped<IAttachmentService, AttachmentService>();

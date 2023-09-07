@@ -2,10 +2,12 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TestUp.DataAccess.IRepositories;
 using TestUp.Service.DTOs.UserAnswer;
+using TestUp.Service.Exceptions;
+using TestUp.Service.Interfaces;
 
 namespace TestUp.Service.Services;
 
-public class UserAnswerService:IUserAnswerService
+public class UserAnswerService : IUserAnswerService
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +27,7 @@ public class UserAnswerService:IUserAnswerService
 
     public async Task<IEnumerable<UserAnswerResultDto>> GetAllAsync()
     {
-        var userAnswers =await _unitOfWork.UserAnswerRepository.SelectAll().ToListAsync();
+        var userAnswers = await _unitOfWork.UserAnswerRepository.SelectAll().ToListAsync();
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(userAnswers);
     }
 
@@ -42,7 +44,7 @@ public class UserAnswerService:IUserAnswerService
     {
         var existUserAnswer = await _unitOfWork.UserAnswerRepository
             .SelectAll(userAnswer => userAnswer.AnswerId == examId).ToListAsync();
-        
+
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
@@ -50,7 +52,7 @@ public class UserAnswerService:IUserAnswerService
     {
         var existUserAnswer = await _unitOfWork.UserAnswerRepository
             .SelectAll(userAnswer => userAnswer.AnswerId == userId).ToListAsync();
-        
+
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
@@ -58,7 +60,7 @@ public class UserAnswerService:IUserAnswerService
     {
         var existUserAnswer = await _unitOfWork.UserAnswerRepository
             .SelectAll(userAnswer => userAnswer.AnswerId == answerId).ToListAsync();
-        
+
         return _mapper.Map<IEnumerable<UserAnswerResultDto>>(existUserAnswer);
     }
 
@@ -75,7 +77,7 @@ public class UserAnswerService:IUserAnswerService
         return _mapper.Map<UserAnswerResultDto>(existUserAnswer);
     }
 
-    #pragma warning disable 
+#pragma warning disable
     public async Task<UserAnswerResultDto> CreateAsync(UserAnswerCreationDto userAnswerCreation)
     {
         var existUser = await _unitOfWork.UserRepository
