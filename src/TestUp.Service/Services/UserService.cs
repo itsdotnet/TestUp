@@ -22,16 +22,42 @@ public class UserService : IUserService
 
     public async Task<UserResultDto> ChangePermissions(long Id, PermissionCreationDto dto)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Id == Id);
+
+        if (exist is null)
+            throw new NotFoundException("User not found");
+
+        var permissions = _unitOfWork.PermissionRepository.SelectAll();
+
+        foreach (var permission in permissions) {
+            if (dto.Create == permission.Create && dto.Update == permission.Update &&
+                dto.Delete == permission.Delete && dto.Get == permission.Get)
+            {
+                dto = null;
+                exist.PermissionId = permission.Id;
+                await _unitOfWork.UserRepository.UpdateAsync(exist);
+                await _unitOfWork.SaveAsync();
+                return _mapper.Map<UserResultDto>(exist);
+            }
+        }
+        var mappedP = _mapper.Map<Permission>(dto);
+        await _unitOfWork.PermissionRepository.AddAsync(mappedP);
+
+        exist.PermissionId = mappedP.Id;
+        await _unitOfWork.UserRepository.UpdateAsync(exist);
+        
+        await _unitOfWork.SaveAsync();
+        return _mapper.Map<UserResultDto>(exist);
     }
 
     public async Task<bool> CheckUserAsync(string emailOrUsername, string password)
     {
         var user = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == emailOrUsername || x.Username == emailOrUsername);
-        if(password.Verify(user.Password)) // will be chan to validator
+        if(password.Verify(user.Password)) // will be change to validator
         {
-
+            return true;
         }
+        return false;
     }
 
     public async Task<UserResultDto> CreateAsync(UserCreationDto dto)
@@ -107,6 +133,8 @@ public class UserService : IUserService
 
     public async Task<UserResultDto> ModifyAsync(UserUpdateDto dto)
     {
+        dto.Username = dto.Username.Trim().ToLower();
+
         var exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Id == dto.Id);
 
         if (exist is null)
