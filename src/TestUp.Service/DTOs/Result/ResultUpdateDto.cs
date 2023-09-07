@@ -7,4 +7,3 @@ public class ResultUpdateDto
     public long ExamId { get; set; }
     public float Score { get; set; }
 }
-

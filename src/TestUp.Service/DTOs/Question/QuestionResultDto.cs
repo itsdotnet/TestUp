@@ -9,5 +9,6 @@ public class QuestionResultDto
     public string Title { get; set; }
     public Level Level { get; set; }
     public string Description { get; set; }
+
     public AttachmentResultDto Attachment { get; set; }
 }

@@ -6,4 +6,3 @@ public class ResultCrestionDto
     public long ExamId { get; set; }
     public float Score { get; set; }
 }
-

@@ -42,8 +42,6 @@ public class MappingProfile : Profile
 
         //Attachment
         CreateMap<Attachment, AttachmentResultDto>().ReverseMap();
-        CreateMap<AttachmentUpdateDto, Attachment>().ReverseMap();
-        CreateMap<AttachmentCreationDto, Attachment>().ReverseMap();
 
         //UserAnswer
         CreateMap<UserAnswer, UserAnswerResultDto>().ReverseMap();

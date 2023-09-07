@@ -1,7 +1,8 @@
-﻿namespace TestUp.Service.DTOs.Attachment;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace TestUp.Service.DTOs.Attachment;
 
 public class AttachmentCreationDto
 {
-    public string FileName { get; set; }
-    public string FilePath { get; set; }
+    public IFormFile file { get; set; }
 }
