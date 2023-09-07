@@ -10,9 +10,12 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TestUp.DataAccess\TestUp.DataAccess.csproj" />
     <ProjectReference Include="..\TestUp.Domain\TestUp.Domain.csproj" />
   </ItemGroup>
 
