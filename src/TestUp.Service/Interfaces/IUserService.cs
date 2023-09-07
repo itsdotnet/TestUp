@@ -1,4 +1,5 @@
-﻿using TestUp.Service.DTOs.User;
+﻿using TestUp.Service.DTOs.Permission;
+using TestUp.Service.DTOs.User;
 
 namespace TestUp.Service.Interfaces;
 
@@ -13,5 +14,6 @@ public interface IUserService
     Task<IEnumerable<UserResultDto>> GetByName(string name);
     Task<bool> CheckUserAsync(string emailOrUsername,string password);
     Task<IEnumerable<UserResultDto>> GetByUsernameAsync(string username);
+    Task<UserResultDto> ChangePermissions(long Id, PermissionCreationDto dto);
     Task<UserResultDto> ModifyPasswordAsync(long id, string oldPass, string newPass);
 }

@@ -14,6 +14,7 @@ public class AuthService : IAuthService
 {
     private readonly IConfiguration configuration;
     private readonly IRepository<User> userRepository;
+
     public AuthService(IRepository<User> userRepository, IConfiguration configuration)
     {
         this.configuration = configuration;
