@@ -1,25 +1,26 @@
-﻿using TestUp.Service.Interfaces;
-using TestUp.DataAccess.IRepositories;
-using AutoMapper;
+﻿using AutoMapper;
+using TestUp.Domain.Enums;
+using TestUp.Service.Interfaces;
 using TestUp.Service.Exceptions;
 using Microsoft.AspNetCore.Http;
-using TestUp.Domain.Enums;
 using TestUp.Service.DTOs.Question;
 using TestUp.Service.DTOs.Attachment;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
+#pragma warning disable CS1998
 
 public class QuestionService : IQuestionService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IAttachmentService _attachmentService;
 
     public QuestionService(IUnitOfWork unitOfWork, IAttachmentService attachmentService, IMapper mapper)
     {
-        _attachmentService = attachmentService;
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _unitOfWork = unitOfWork;
+        _attachmentService = attachmentService;
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -45,7 +46,6 @@ public class QuestionService : IQuestionService
         return _mapper.Map<QuestionResultDto>(question);
     }
 
-    #pragma warning disable CS1998
     public async Task<IEnumerable<QuestionResultDto>> GetAllAsync()
     {
         var questions = _unitOfWork.QuestionRepository.SelectAll(includes: new[] { "User", "Attachment", "Answers" });
@@ -118,4 +118,3 @@ public class QuestionService : IQuestionService
         return _mapper.Map<IEnumerable<QuestionResultDto>>(questions);
     }
 }
-
