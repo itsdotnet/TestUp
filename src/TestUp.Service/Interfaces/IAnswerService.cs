@@ -7,6 +7,6 @@ public interface IAnswerService
     Task<bool> DeleteAsync(long id);
     Task<IEnumerable<Answer>> GetAllAsync();
     Task<AnswerResultDto> GetByIdAsync(long id);
-    Task<AnswerResultDto> ModifuAsync(AnswerUpdateDto answerUpdate);
+    Task<AnswerResultDto> ModifyAsync(AnswerUpdateDto answerUpdate);
     Task<AnswerResultDto> CreateAsync(AnswerCreationDto answerCreation);
 }
