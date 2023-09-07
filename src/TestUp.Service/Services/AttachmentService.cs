@@ -1,9 +1,9 @@
-﻿using TestUp.DataAccess.IRepositories;
-using TestUp.Service.DTOs.Attachment;
+﻿using TestUp.Service.Helpers;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Extensions;
-using TestUp.Service.Helpers;
 using TestUp.Service.Interfaces;
+using TestUp.Service.DTOs.Attachment;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 
