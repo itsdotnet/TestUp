@@ -35,6 +35,14 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
+// Lowercase route
+
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Conventions.Add(new LowercaseControllerModelConvention());
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
