@@ -5,6 +5,7 @@ using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
 using TestUp.Service.DTOs.Permission;
 using TestUp.DataAccess.IRepositories;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TestUp.Service.Services;
     #pragma warning disable CS1998
@@ -32,7 +33,18 @@ public class UserService : IUserService
 
     public async Task<UserResultDto> CreateAsync(UserCreationDto dto)
     {
-        throw new NotImplementedException();
+        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username);
+
+        if (exist is null)
+            throw new NotFoundException("User not found");
+
+
+        _mapper.Map(dto, exist);
+
+        await _unitOfWork.UserRepository.UpdateAsync(exist);
+        await _unitOfWork.SaveAsync();
+
+        return _mapper.Map<UserResultDto>(exist);
     }
 
     public async Task<bool> DeleteAsync(long id)
@@ -91,10 +103,18 @@ public class UserService : IUserService
 
     public async Task<UserResultDto> ModifyAsync(UserUpdateDto dto)
     {
-        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username);
+        var exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Id == dto.Id);
 
         if (exist is null)
             throw new NotFoundException("User not found");
+        
+        if(exist.Username != dto.Username)
+        {
+            exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Username == dto.Username);
+            if(exist is not null)
+                throw new AlreadyExistException("User already exist with this Username");
+        }
+
 
         _mapper.Map(dto, exist);
 
