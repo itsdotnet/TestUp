@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using TestUp.DataAccess.IRepositories;
+using TestUp.Service.DTOs.Answer;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
-using TestUp.Service.DTOs.Answer;
-using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 #pragma warning disable CS1998
@@ -90,5 +90,17 @@ public class AnswerService : IAnswerService
         await _unitOfWork.SaveAsync();
 
         return _mapper.Map<AnswerResultDto>(newAnswer);
+    }
+
+    public async Task<IEnumerable<AnswerResultDto>> GetByQuestionIdAsync(long questionId)
+    {
+        var existingQuestion = await _unitOfWork.QuestionRepository.SelectAsync(x => x.Id == questionId);
+
+        if (existingQuestion is null)
+            throw new NotFoundException("Question not found");
+
+        var answers = await _unitOfWork.AnswerRepository
+            .SelectAsync(x => x.QuestionId == questionId, new string[] { "Question", "Attachment" });
+        return _mapper.Map<IEnumerable<AnswerResultDto>>(answers);
     }
 }

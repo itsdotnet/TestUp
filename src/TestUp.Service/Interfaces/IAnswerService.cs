@@ -9,4 +9,5 @@ public interface IAnswerService
     Task<AnswerResultDto> GetByIdAsync(long id);
     Task<AnswerResultDto> ModifyAsync(AnswerUpdateDto answerUpdate);
     Task<AnswerResultDto> CreateAsync(AnswerCreationDto answerCreation);
+    Task<IEnumerable<AnswerResultDto>> GetByQuestionIdAsync(long questionId);
 }
