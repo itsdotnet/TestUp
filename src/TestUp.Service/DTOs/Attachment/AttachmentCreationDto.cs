@@ -4,5 +4,5 @@ namespace TestUp.Service.DTOs.Attachment;
 
 public class AttachmentCreationDto
 {
-    public IFormFile file { get; set; }
+    public IFormFile File { get; set; }
 }

@@ -26,10 +26,10 @@ public class QuestionService : IQuestionService
             if (question is null)
                 throw new NotFoundException("Question not found");
 
-            _unitOfWork.QuestionRepository.Delete(question);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.QuestionRepository.DeleteAsync(x =>x == question);
+            await _unitOfWork.SaveAsync();
 
-            return true; // Deletion successful
+            return await _unitOfWork.SaveAsync();
         }
 
         public async Task<QuestionResultDto> GetByIdAsync(long id)
@@ -42,9 +42,10 @@ public class QuestionService : IQuestionService
             return _mapper.Map<QuestionResultDto>(question);
         }
 
+        #pragma warning disable CS1998
         public async Task<IEnumerable<QuestionResultDto>> GetAllAsync()
         {
-            var questions = await _unitOfWork.QuestionRepository.SelectAll(null, includes: new[] { "User", "Attachment" });
+            var questions = _unitOfWork.QuestionRepository.SelectAll(includes: new[] { "User", "Attachment", "Answers" });
 
             return _mapper.Map<IEnumerable<QuestionResultDto>>(questions);
         }
@@ -64,7 +65,7 @@ public class QuestionService : IQuestionService
             // Update the question's image path
             // question.ImagePath = imagePath;
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveAsync();
 
             return true; // Modification successful
         }
@@ -76,43 +77,43 @@ public class QuestionService : IQuestionService
             if (question is null)
                 throw new NotFoundException("Question not found");
 
-            // Update the question's properties based on the DTO
             _mapper.Map(dto, question);
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveAsync();
 
             return _mapper.Map<QuestionResultDto>(question);
         }
 
         public async Task<QuestionResultDto> CreateAsync(QuestionCreationDto dto)
         {
-            // Create a new question entity based on the DTO
             var question = _mapper.Map<Question>(dto);
 
-            // Add the question to the repository
             await _unitOfWork.QuestionRepository.AddAsync(question);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveAsync();
 
             return _mapper.Map<QuestionResultDto>(question);
         }
 
         public async Task<IEnumerable<QuestionResultDto>> GetByUserIdAsync(long userId)
         {
-            var questions = await _unitOfWork.QuestionRepository.SelectAsync(q => q.UserId == userId, includes: new[] { "User", "Attachment" });
+            var questions = await _unitOfWork.QuestionRepository.SelectAsync(q => q.UserId == userId,
+                includes: new[] { "User", "Attachment", "Answers" });
 
             return _mapper.Map<IEnumerable<QuestionResultDto>>(questions);
         }
 
         public async Task<IEnumerable<QuestionResultDto>> SearchAsync(string searchTerm)
         {
-            var questions = await _unitOfWork.QuestionRepository.SearchAsync(searchTerm);
+            var questions = _unitOfWork.QuestionRepository.SelectAll(q => q.Title.ToLower().Trim().Contains(searchTerm.ToLower()) ||
+                q.Description.ToLower().Trim().Contains(searchTerm.ToLower()));
 
             return _mapper.Map<IEnumerable<QuestionResultDto>>(questions);
         }
 
         public async Task<IEnumerable<QuestionResultDto>> GetByLevelAsync(long userId, Level level)
         {
-            var questions = await _unitOfWork.QuestionRepository.SelectAsync(q => q.UserId == userId && q.Level == level, includes: new[] { "User", "Attachment" });
+            var questions = _unitOfWork.QuestionRepository.SelectAll(q => q.UserId == userId && q.Level == level,
+                includes: new[] { "User", "Attachment", "Answers" });
 
             return _mapper.Map<IEnumerable<QuestionResultDto>>(questions);
         }
