@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TestUp.DataAccess.IRepositories; // Replace with your repository namespace
+using TestUp.DataAccess.IRepositories;
 using TestUp.Domain.Constans;
 using TestUp.Service.DTOs.Exam;
 using TestUp.Service.Exceptions;
