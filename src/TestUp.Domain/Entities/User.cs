@@ -16,6 +16,7 @@ public class User : Auditable
     public long PermissionId { get; set; }
     public Permission Permission { get; set; }
 
-    public ICollection<UserAnswer> Answers { get; set; }
     public ICollection<Result> Results { get; set; }
+    public ICollection<UserAnswer> Answers { get; set; }
+    public ICollection<Question> Questions { get; set; }
 }

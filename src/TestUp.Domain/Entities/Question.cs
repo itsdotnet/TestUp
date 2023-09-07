@@ -7,6 +7,9 @@ public class Question : Auditable
     public Level Level { get; set; }
     public string Description { get; set; }
 
+    public long UserId { get; set; }
+    public User User { get; set; }
+
     public long? AttachmentId { get; set; }
     public Attachment Attachment { get; set; }
 
