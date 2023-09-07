@@ -55,6 +55,8 @@ public class Repository<T> : IRepository<T> where T : Auditable
         return query;
     }
 
+    #pragma warning disable CS1998
+    
     public async Task<T> UpdateAsync(T entity)
     {
         EntityEntry<T> entry = this.dbContext.Update(entity);
