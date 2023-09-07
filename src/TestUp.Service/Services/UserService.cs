@@ -5,10 +5,9 @@ using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
 using TestUp.Service.DTOs.Permission;
 using TestUp.DataAccess.IRepositories;
-using System.Security.Cryptography.X509Certificates;
 
 namespace TestUp.Service.Services;
-    #pragma warning disable CS1998
+#pragma warning disable CS1998
 
 public class UserService : IUserService
 {
@@ -28,20 +27,25 @@ public class UserService : IUserService
 
     public async Task<bool> CheckUserAsync(string emailOrUsername, string password)
     {
-        throw new NotImplementedException();
+        var user = await _unitOfWork.UserRepository.SelectAsync(x => x.Email == emailOrUsername || x.Username == emailOrUsername);
+        if(password.Verify(user.Password)) // will be chan to validator
+        {
+
+        }
     }
 
     public async Task<UserResultDto> CreateAsync(UserCreationDto dto)
     {
-        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username);
+        dto.Username = dto.Username.Trim().ToLower();
+        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username || q.Email == q.Email);
 
-        if (exist is null)
-            throw new NotFoundException("User not found");
+        if (exist is not null)
+            throw new AlreadyExistException("User already exist with this Username");
 
 
-        _mapper.Map(dto, exist);
-
-        await _unitOfWork.UserRepository.UpdateAsync(exist);
+        var newUser = _mapper.Map<User>(dto);
+        
+        await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 
         return _mapper.Map<UserResultDto>(exist);
@@ -107,11 +111,11 @@ public class UserService : IUserService
 
         if (exist is null)
             throw new NotFoundException("User not found");
-        
-        if(exist.Username != dto.Username)
+
+        if (exist.Username != dto.Username)
         {
-            exist = await _unitOfWork.UserRepository.SelectAsync(d => d.Username == dto.Username);
-            if(exist is not null)
+            var existUser = await _unitOfWork.UserRepository.SelectAsync(d => d.Username == dto.Username);
+            if (existUser is not null)
                 throw new AlreadyExistException("User already exist with this Username");
         }
 

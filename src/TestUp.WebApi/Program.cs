@@ -1,15 +1,15 @@
+using Serilog;
+using System.IO;
+using TestUp.Service.Helpers;
+using TestUp.WebApi.Extensions;
+using TestUp.DataAccess.Contexts;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using System;
-using System.IO;
-using TestUp.DataAccess.Contexts;
-using TestUp.Service.Helpers;
-using TestUp.WebApi.Extensions;
+using TestUp.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +52,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
