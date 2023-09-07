@@ -15,4 +15,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TestUp.DataAccess\TestUp.DataAccess.csproj" />
+    <ProjectReference Include="..\TestUp.Domain\TestUp.Domain.csproj" />
+    <ProjectReference Include="..\TestUp.Service\TestUp.Service.csproj" />
+  </ItemGroup>
+
 </Project>

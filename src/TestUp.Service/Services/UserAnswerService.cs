@@ -6,7 +6,7 @@ using TestUp.Service.Interfaces;
 
 namespace TestUp.Service.Services;
 
-public class UserAnswerService:IUserAnswerInterface
+public class UserAnswerService:IUserAnswerService
 {
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
