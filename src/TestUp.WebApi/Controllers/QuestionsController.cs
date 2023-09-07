@@ -1,18 +1,18 @@
-﻿using TestUp.Domain.Enums;
-using TestUp.WebApi.Models;
-using System.Threading.Tasks;
-using TestUp.Service.Services;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using TestUp.Domain.Enums;
 using TestUp.Service.DTOs.Question;
+using TestUp.Service.Interfaces;
+using TestUp.WebApi.Models;
 
 namespace TestUp.WebApi.Controllers;
 
 public class QuestionsController : BaseController
 {
-    private readonly QuestionService questionService;
+    private readonly IQuestionService questionService;
 
-    public QuestionsController(QuestionService questionService)
+    public QuestionsController(IQuestionService questionService)
     {
         this.questionService = questionService;
     }
@@ -86,7 +86,7 @@ public class QuestionsController : BaseController
         {
             StatusCode = 200,
             Message = "Success",
-            Data = await this.questionService.GetByLevelAsync(userId,level)
+            Data = await this.questionService.GetByLevelAsync(userId, level)
         });
 
     [HttpGet("search")]
