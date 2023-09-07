@@ -4,11 +4,11 @@ namespace TestUp.Service.Interfaces;
 
 public interface IQuestionPackService
 {
-    Task DeleteAsync(long id);
+    Task<bool> DeleteAsync(long id);
     Task<IEnumerable<QuestionPack>> GetAllAsync();
     Task<QuestionPackResultDto> GetByIdAsync(long id);
     Task<IEnumerable<QuestionPack>> GetByExamIdAsync(long examId);
-    Task<QuestionPackResultDto> UpdateAsync(QuestionPackUpdateDto questionPack);
+    Task<QuestionPackResultDto> ModifyAsync(QuestionPackUpdateDto questionPack);
     Task<QuestionPackResultDto> CreateAsync(QuestionPackCreationDto questionPack);
     Task<IEnumerable<QuestionPackResultDto>> CollectAsync(QuestionPackCollectDto dto);
 }

@@ -4,7 +4,7 @@ namespace TestUp.Service.Interfaces;
 
 public interface IUserService
 {
-    Task<bool> RemoveAsync(long id);
+    Task<bool> DeleteAsync(long id);
     Task<UserResultDto> GetByIdAsync(long id);
     Task<IEnumerable<UserResultDto>> GetAllAsync();
     Task<UserResultDto> GetByEmailAsync(string email);
