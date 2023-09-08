@@ -6,6 +6,7 @@ namespace TestUp.Service.Interfaces;
 public interface IExamService
 {
     Task<bool> DeleteAsync(long id);
+    Task<bool> SearchExamAsync(long id);
     Task<IEnumerable<Exam>> GetAllAsync();
     Task<ExamResultDto> GetByIdAsync(long id);
     Task<IEnumerable<ExamResultDto>> EndedExams();
