@@ -1,10 +1,10 @@
 ﻿using TestUp.WebApi.Models;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using TestUp.Service.Helpers;
 using TestUp.Service.DTOs.User;
+using Microsoft.AspNetCore.Mvc;
 using TestUp.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 
 namespace TestUp.WebApi.Controllers;
 
@@ -19,21 +19,41 @@ public class UsersController : BaseController
 
     [HttpPost("register")]
     public async Task<IActionResult> PostAsync(UserCreationDto dto)
-    => Ok(new Response
     {
-        StatusCode = 200,
-        Message = "Success",
-        Data = await this.userService.CreateAsync(dto)
-    });
+        var emailValid = Validator.IsValidEmail(dto.Email);
+        var usernameValid = Validator.IsValidUsername(dto.Username);
+        var passwordValid = Validator.IsValidPassword(dto.Password);
+        var nameValid = Validator.IsValidName(dto.FirstName);
+        var surnameValid = Validator.IsValidName(dto.LastName);
+
+        if (emailValid && usernameValid && passwordValid && nameValid && surnameValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await this.userService.CreateAsync(dto)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpPut("update")]
     public async Task<IActionResult> PutAsync(UserUpdateDto dto)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Success",
-            Data = await this.userService.ModifyAsync(dto)
-        });
+    {
+        var usernameValid = Validator.IsValidUsername(dto.Username);
+        var nameValid = Validator.IsValidName(dto.FirstName);
+        var surnameValid = Validator.IsValidName(dto.LastName);
+
+        if (usernameValid && nameValid && surnameValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await this.userService.ModifyAsync(dto)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpDelete("delete/{id:long}")]
     public async Task<IActionResult> DeleteAsync(long id)
@@ -92,10 +112,18 @@ public class UsersController : BaseController
 
     [HttpPut("update-password")]
     public async Task<IActionResult> ModifyPasswordAsync(long id, string oldPass, string newPass)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Accsess",
-            Data = await this.userService.ModifyPasswordAsync(id, oldPass, newPass)
-        });
+    {
+        var oldPasswordValid = Validator.IsValidName(oldPass);
+        var newPasswordValid = Validator.IsValidName(newPass);
+
+        if (oldPasswordValid && newPasswordValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await this.userService.ModifyPasswordAsync(id, oldPass, newPass)
+            });
+
+        return BadRequest("Invalid new or old password");
+    }
 }
