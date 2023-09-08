@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using TestUp.Service.DTOs.Answer;
-using TestUp.Service.DTOs.Attachment;
-using TestUp.Service.DTOs.Exam;
-using TestUp.Service.DTOs.Question;
-using TestUp.Service.DTOs.QuestionPack;
-using TestUp.Service.DTOs.Result;
 using TestUp.Service.DTOs.User;
+using TestUp.Service.DTOs.Exam;
+using TestUp.Service.DTOs.Answer;
+using TestUp.Service.DTOs.Result;
+using TestUp.Service.DTOs.Question;
+using TestUp.Service.DTOs.Attachment;
 using TestUp.Service.DTOs.UserAnswer;
+using TestUp.Service.DTOs.QuestionPack;
 
 namespace TestUp.Service.Mappers;
 

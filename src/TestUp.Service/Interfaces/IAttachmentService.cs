@@ -4,6 +4,6 @@ namespace TestUp.Service.Interfaces;
 
 public interface IAttachmentService
 {
-    Task<Attachment> UploadAsync(AttachmentCreationDto dto);
     Task<bool> DeleteAsync(long id);
+    Task<Attachment> UploadAsync(AttachmentCreationDto dto);
 }

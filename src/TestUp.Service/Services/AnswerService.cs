@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using TestUp.DataAccess.IRepositories;
-using TestUp.Service.DTOs.Answer;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
+using TestUp.Service.DTOs.Answer;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 #pragma warning disable CS1998
