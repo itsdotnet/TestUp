@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using TestUp.Domain.Commons;
+﻿using TestUp.Domain.Commons;
+using System.Linq.Expressions;
 
 namespace TestUp.DataAccess.IRepositories;
 
