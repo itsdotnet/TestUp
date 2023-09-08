@@ -39,7 +39,7 @@ public class UserService : IUserService
 
 
         var newUser = _mapper.Map<User>(dto);
-
+        newUser.Password = PasswordHasher.Hash(newUser.Password);
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 
