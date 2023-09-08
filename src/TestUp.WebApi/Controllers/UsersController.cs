@@ -73,7 +73,6 @@ public class UsersController : BaseController
             Data = await this.userService.GetByIdAsync(id)
         });
 
-    [Authorize(Roles = "User")]
     [HttpGet("get-all")]
     public async Task<IActionResult> GetAllAsync()
         => Ok(new Response

@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
-using TestUp.Service.DTOs.Exam;
-using TestUp.Service.Helpers;
-using TestUp.Service.Interfaces;
+﻿using System;
 using TestUp.WebApi.Models;
+using System.Threading.Tasks;
+using TestUp.Service.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using TestUp.Service.DTOs.Exam;
+using TestUp.Service.Interfaces;
 
 namespace TestUp.WebApi.Controllers;
 
@@ -40,9 +39,8 @@ public class ExamsController : BaseController
     {
         var titleValid = Validator.IsValidText(examUpdate.Title);
         var descriptionValid = Validator.IsValidDescription(examUpdate.Description);
-        var passwordValid = Validator.IsValidPassword(examUpdate.Password);
 
-        if (titleValid && descriptionValid && passwordValid)
+        if (titleValid && descriptionValid)
             return Ok(new Response
             {
                 StatusCode = 200,
@@ -123,5 +121,14 @@ public class ExamsController : BaseController
             StatusCode = 200,
             Message = "Succes",
             Data = await this.examService.CurrentExams()
+        });
+
+    [HttpGet("serach")]
+    public async Task<IActionResult> SearchExamAsync(long id)
+        => Ok(new Response
+        {
+            StatusCode = 200,
+            Message = "Succes",
+            Data = await this.examService.SearchExamAsync(id)
         });
 }

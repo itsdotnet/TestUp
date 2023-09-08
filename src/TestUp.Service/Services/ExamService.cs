@@ -108,4 +108,14 @@ public class ExamService : IExamService
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(nearbyExams);
     }
+
+    public async Task<bool> SearchExamAsync(long id)
+    {
+        var exam = _unitOfWork.ExamRepository.SelectAll().FirstOrDefault(i => i.Id.Equals(id));
+
+        if(exam is null)
+            return false;
+
+        return true;
+    }
 }

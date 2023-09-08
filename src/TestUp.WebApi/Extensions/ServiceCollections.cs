@@ -11,6 +11,7 @@ using TestUp.DataAccess.Repository;
 using TestUp.Service.Interfaces;
 using TestUp.Service.Mappers;
 using TestUp.Service.Services;
+using TestUp.WebApi.Filters;
 
 namespace TestUp.WebApi.Extensions;
 
@@ -18,6 +19,8 @@ public static class ServiceCollections
 {
     public static void AddServices(this IServiceCollection services)
     {
+        services.AddScoped<DynamicAuthorizeFilter>();
+        services.AddScoped<IRolesService, RolesService>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IUserService, UserService>();
