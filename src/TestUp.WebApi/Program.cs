@@ -26,15 +26,6 @@ builder.Services.AddServices();
 
 builder.Services.ConfigureSwagger();
 
-// Policy
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("TeacherPolicy", policy => policy.RequireRole("Teacher"));
-    options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
-});
-
 // JWT
 
 builder.Services.AddJwt(builder.Configuration);

@@ -15,10 +15,24 @@ public class DynamicAuthorizeFilter : IAuthorizationFilter
             context.Result = new ForbidResult();
         }
 
-        if (userRole != RoleUser.Admin)
+        else if (userRole != RoleUser.Admin)
         {
             context.Result = new ForbidResult();
         }
 
+        else if (userRole != RoleUser.Teacher)
+        {
+            context.Result = new ForbidResult();
+        }
+
+        else if (userRole != RoleUser.AdminTeacher)
+        {
+            context.Result = new ForbidResult();
+        }
+
+        else if(userRole != RoleUser.AdminUser)
+        {
+            context.Result = new ForbidResult();
+        }
     }
 }
