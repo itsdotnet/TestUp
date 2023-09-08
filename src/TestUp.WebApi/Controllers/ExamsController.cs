@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using TestUp.Service.DTOs.Exam;
+using TestUp.Service.Helpers;
 using TestUp.Service.Interfaces;
 using TestUp.WebApi.Models;
 
@@ -19,21 +20,39 @@ public class ExamsController : BaseController
     [HttpPost("create")]
     //[Authorize(Policy = "TeacherPolicy")]
     public async Task<IActionResult> PostAsync(ExamCreationDto examCreation)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Succes",
-            Data = await this.examService.CreateAsync(examCreation)
-        });
+    {
+        var titleValid = Validator.IsValidText(examCreation.Title);
+        var descriptionValid = Validator.IsValidDescription(examCreation.Description);
+        var passwordValid = Validator.IsValidPassword(examCreation.Password);
+
+        if (titleValid && descriptionValid && passwordValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Succes",
+                Data = await this.examService.CreateAsync(examCreation)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpPut("update")]
     public async Task<IActionResult> PutAsync(ExamUpdateDto examUpdate)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Succes",
-            Data = await this.examService.ModifyAsync(examUpdate)
-        });
+    {
+        var titleValid = Validator.IsValidText(examUpdate.Title);
+        var descriptionValid = Validator.IsValidDescription(examUpdate.Description);
+        var passwordValid = Validator.IsValidPassword(examUpdate.Password);
+
+        if (titleValid && descriptionValid && passwordValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Succes",
+                Data = await this.examService.ModifyAsync(examUpdate)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpDelete("delete/{id:long}")]
     public async Task<IActionResult> DeleteAsync(long id)
