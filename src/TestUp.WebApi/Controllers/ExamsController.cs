@@ -40,9 +40,8 @@ public class ExamsController : BaseController
     {
         var titleValid = Validator.IsValidText(examUpdate.Title);
         var descriptionValid = Validator.IsValidDescription(examUpdate.Description);
-        var passwordValid = Validator.IsValidPassword(examUpdate.Password);
 
-        if (titleValid && descriptionValid && passwordValid)
+        if (titleValid && descriptionValid)
             return Ok(new Response
             {
                 StatusCode = 200,
