@@ -6,7 +6,10 @@ using TestUp.WebApi.Models;
 
 namespace TestUp.WebApi.Controllers;
 
-public class RoleController : BaseController
+[ApiController]
+[Route("api/[controller]")]
+
+public class RoleController : ControllerBase
 {
     private readonly IRolesService rolesService;
     public RoleController(IRolesService rolesService)
