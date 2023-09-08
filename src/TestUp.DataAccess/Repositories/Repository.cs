@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using TestUp.Domain.Commons;
 using System.Linq.Expressions;
 using TestUp.DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
 using TestUp.DataAccess.IRepositories;
-using TestUp.Domain.Commons;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace TestUp.DataAccess.Repository;
+#pragma warning disable CS1998
 
 public class Repository<T> : IRepository<T> where T : Auditable
 {
-    private readonly TestUpDbContext dbContext;
     private readonly DbSet<T> table;
+    private readonly TestUpDbContext dbContext;
 
     public Repository(TestUpDbContext dbContext)
     {
@@ -23,6 +24,13 @@ public class Repository<T> : IRepository<T> where T : Auditable
         await table.AddAsync(entity);
 
         return entity;
+    }
+
+    public async Task<T> UpdateAsync(T entity)
+    {
+        EntityEntry<T> entry = this.dbContext.Update(entity);
+
+        return entry.Entity;
     }
 
     public async Task<bool> DeleteAsync(Expression<Func<T, bool>> expression)
@@ -54,16 +62,7 @@ public class Repository<T> : IRepository<T> where T : Auditable
 
         return query;
     }
-
-    #pragma warning disable CS1998
     
-    public async Task<T> UpdateAsync(T entity)
-    {
-        EntityEntry<T> entry = this.dbContext.Update(entity);
-
-        return entry.Entity;
-    }
-
     public async Task SaveAsync()
     {
         await dbContext.SaveChangesAsync();

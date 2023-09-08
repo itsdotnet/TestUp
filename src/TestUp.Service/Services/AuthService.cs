@@ -24,6 +24,24 @@ public class AuthService : IAuthService
         this.userRepository = userRepository;
     }
 
+    public string GetUserIdFromToken(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        if (tokenHandler.CanReadToken(token))
+        {
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var idClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id");
+
+            if (idClaim != null)
+            {
+                return idClaim.Value;
+            }
+        }
+
+        return null;
+    }
+
     public async Task<string> GenerateAndCacheTokenByEmailAsync(string email, string password)
     {
         var user = await this.userRepository.SelectAsync(u => u.Email.Equals(email));
@@ -86,23 +104,5 @@ public class AuthService : IAuthService
         _memoryCache.Set(user.Id.ToString(), result, TimeSpan.FromDays(1));
 
         return result;
-    }
-
-    public string GetUserIdFromToken(string token)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-
-        if (tokenHandler.CanReadToken(token))
-        {
-            var jwtToken = tokenHandler.ReadJwtToken(token);
-            var idClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == "Id");
-
-            if (idClaim != null)
-            {
-                return idClaim.Value;
-            }
-        }
-
-        return null;
     }
 }

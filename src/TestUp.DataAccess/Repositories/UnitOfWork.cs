@@ -25,8 +25,8 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<Exam> ExamRepository { get; set; }
     public IRepository<Answer> AnswerRepository { get; set; }
     public IRepository<Result> ResultRepository { get; set; }
-    public IRepository<Attachment> AttachmentRepository { get; set; }
     public IRepository<Question> QuestionRepository { get; set; }
+    public IRepository<Attachment> AttachmentRepository { get; set; }
     public IRepository<UserAnswer> UserAnswerRepository { get; set; }
     public IRepository<QuestionPack> QuestionPackRepository { get; set; }
 
