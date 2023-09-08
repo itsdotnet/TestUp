@@ -1,7 +1,7 @@
-﻿using TestUp.Service.DTOs.Answer;
+﻿using TestUp.Service.DTOs.User;
 using TestUp.Service.DTOs.Exam;
+using TestUp.Service.DTOs.Answer;
 using TestUp.Service.DTOs.Question;
-using TestUp.Service.DTOs.User;
 
 namespace TestUp.Service.DTOs.UserAnswer;
 

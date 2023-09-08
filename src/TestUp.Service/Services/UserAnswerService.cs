@@ -1,9 +1,9 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using TestUp.DataAccess.IRepositories;
-using TestUp.Service.DTOs.UserAnswer;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using TestUp.Service.DTOs.UserAnswer;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
 

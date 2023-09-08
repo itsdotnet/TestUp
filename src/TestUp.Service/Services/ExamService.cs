@@ -32,6 +32,16 @@ public class ExamService : IExamService
         return true;
     }
 
+    public async Task<bool> SearchExamAsync(long id)
+    {
+        var exam = _unitOfWork.ExamRepository.SelectAll().FirstOrDefault(i => i.Id.Equals(id));
+
+        if (exam is null)
+            return false;
+
+        return true;
+    }
+
     public async Task<IEnumerable<Exam>> GetAllAsync()
     {
         return _unitOfWork.ExamRepository.SelectAll();
@@ -107,15 +117,5 @@ public class ExamService : IExamService
         var nearbyExams = _unitOfWork.ExamRepository.SelectAll(e => e.StartTime > dateTime.AddDays(-1) && e.StartTime < dateTime.AddDays(1)).ToList();
 
         return _mapper.Map<IEnumerable<ExamResultDto>>(nearbyExams);
-    }
-
-    public async Task<bool> SearchExamAsync(long id)
-    {
-        var exam = _unitOfWork.ExamRepository.SelectAll().FirstOrDefault(i => i.Id.Equals(id));
-
-        if(exam is null)
-            return false;
-
-        return true;
     }
 }

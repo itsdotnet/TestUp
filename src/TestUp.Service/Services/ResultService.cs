@@ -1,11 +1,12 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using TestUp.DataAccess.IRepositories;
-using TestUp.Service.DTOs.Result;
 using TestUp.Service.Exceptions;
 using TestUp.Service.Interfaces;
+using TestUp.Service.DTOs.Result;
+using Microsoft.EntityFrameworkCore;
+using TestUp.DataAccess.IRepositories;
 
 namespace TestUp.Service.Services;
+#pragma warning disable
 
 public class ResultService:IResultService
 {
@@ -25,12 +26,6 @@ public class ResultService:IResultService
         return true;
     }
 
-    public async Task<IEnumerable<ResultResultDto>> GetAllAsync()
-    {
-        var results = await _unitOfWork.ResultRepository.SelectAll().ToListAsync();
-        return _mapper.Map<IEnumerable<ResultResultDto>>(results);
-    }
-
     public async Task<ResultResultDto> GetByIdAsync(long id)
     {
         var existResult = await _unitOfWork.ResultRepository
@@ -38,6 +33,17 @@ public class ResultService:IResultService
                           ?? throw new NotFoundException(message: "Result is not found!");
 
         return _mapper.Map<ResultResultDto>(existResult);
+    }
+
+    public async Task<float> MyScore(long userId, long examId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IEnumerable<ResultResultDto>> GetAllAsync()
+    {
+        var results = await _unitOfWork.ResultRepository.SelectAll().ToListAsync();
+        return _mapper.Map<IEnumerable<ResultResultDto>>(results);
     }
 
     public async Task<IEnumerable<ResultResultDto>> GetByExamId(long examId)
@@ -54,12 +60,6 @@ public class ResultService:IResultService
             .SelectAll(result => result.UserId == userId).ToListAsync();
 
         return _mapper.Map<IEnumerable<ResultResultDto>>(existResults);
-    }
-
-    #pragma warning disable
-    public async Task<float> MyScore(long userId, long examId)
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<ResultResultDto> UpdateAsync(ResultUpdateDto resultUpdate)
