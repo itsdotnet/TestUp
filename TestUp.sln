@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUp.DataAccess", "src\Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUp.Service", "src\TestUp.Service\TestUp.Service.csproj", "{C999F2FE-8B5C-4A58-8C95-450465F9C39E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUp.WebApi", "src\TestUp.WebApi\TestUp.WebApi.csproj", "{96F28AB5-CAD1-463C-995D-DDEED4AF8386}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestUp.WebApi", "src\TestUp.WebApi\TestUp.WebApi.csproj", "{96F28AB5-CAD1-463C-995D-DDEED4AF8386}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestUp.Web", "src\TestUp.Web\TestUp.Web.csproj", "{8451581E-519E-4A7B-91DD-098E7186E2F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{96F28AB5-CAD1-463C-995D-DDEED4AF8386}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96F28AB5-CAD1-463C-995D-DDEED4AF8386}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96F28AB5-CAD1-463C-995D-DDEED4AF8386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8451581E-519E-4A7B-91DD-098E7186E2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8451581E-519E-4A7B-91DD-098E7186E2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8451581E-519E-4A7B-91DD-098E7186E2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8451581E-519E-4A7B-91DD-098E7186E2F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{DEB262E7-A6CF-48EE-B48B-2C6F94DE4DD0} = {858DE962-8CD5-4B4F-BC23-7C396E78CD56}
 		{C999F2FE-8B5C-4A58-8C95-450465F9C39E} = {858DE962-8CD5-4B4F-BC23-7C396E78CD56}
 		{96F28AB5-CAD1-463C-995D-DDEED4AF8386} = {858DE962-8CD5-4B4F-BC23-7C396E78CD56}
+		{8451581E-519E-4A7B-91DD-098E7186E2F2} = {858DE962-8CD5-4B4F-BC23-7C396E78CD56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01688221-718F-479C-8DA4-C589292E4A9E}
