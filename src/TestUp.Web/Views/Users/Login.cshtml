@@ -1,6 +1,43 @@
-﻿namespace TestUp.Web.Views.Users
-{
-    public class Login
-    {
-    }
+﻿@{
+    ViewData["Title"] = "Test Up - login";
 }
+
+@model LoginView;
+
+<body style="background-color:#171923">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post" action="Login">
+            <div>
+                <label for="UsernameOrEmail">Username or Email</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="Password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button" asp-action="login" asp-controller="users" method="post">Login</button>
+        </form>
+    </div>
+</body>
+<style>
+
+    .login-container{
+        color: #c6f5f2;
+        justify-content: center;
+        align-content: center;
+        height: 402px;
+        width: 350px;
+        background-color: #1a202c;
+    }
+
+    .login-button {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+    }
+</style>

@@ -1,15 +1,16 @@
-﻿using TestUp.WebApi.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TestUp.Service.Helpers;
 using TestUp.Service.DTOs.User;
-using Microsoft.AspNetCore.Mvc;
+using TestUp.Service.Helpers;
 using TestUp.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using TestUp.WebApi.Filters;
+using TestUp.WebApi.Models;
 
 namespace TestUp.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[DynamicAuthorize]
 public class UsersController : ControllerBase
 {
     private readonly IUserService userService;
