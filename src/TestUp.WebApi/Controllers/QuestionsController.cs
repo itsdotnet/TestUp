@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using TestUp.Domain.Enums;
-using TestUp.Service.DTOs.Question;
-using TestUp.Service.Interfaces;
+﻿using TestUp.Domain.Enums;
 using TestUp.WebApi.Models;
+using System.Threading.Tasks;
+using TestUp.Service.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using TestUp.Service.Interfaces;
+using TestUp.Service.DTOs.Question;
 
 namespace TestUp.WebApi.Controllers;
 
@@ -19,21 +20,37 @@ public class QuestionsController : BaseController
 
     [HttpPost("create")]
     public async Task<IActionResult> PostAsync(QuestionCreationDto dto)
-    => Ok(new Response
     {
-        StatusCode = 200,
-        Message = "Success",
-        Data = await this.questionService.CreateAsync(dto)
-    });
+        var titlevalid = Validator.IsValidText(dto.Title);
+        var descriptvalid = Validator.IsValidDescription(dto.Description);
+
+        if (titlevalid && descriptvalid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await this.questionService.CreateAsync(dto)
+            });
+
+        return BadRequest("Title or Description invalid");
+    }
 
     [HttpPut("update")]
     public async Task<IActionResult> PutAsync(QuestionUpdateDto dto)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Success",
-            Data = await this.questionService.ModifyAsync(dto)
-        });
+    {
+        var titlevalid = Validator.IsValidText(dto.Title);
+        var descriptvalid = Validator.IsValidDescription(dto.Description);
+
+        if (titlevalid && descriptvalid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Success",
+                Data = await this.questionService.ModifyAsync(dto)
+            });
+
+        return BadRequest("Title or Description invalid");
+    }
 
     [HttpDelete("delete/{id:long}")]
     public async Task<IActionResult> DeleteAsync(long id)
