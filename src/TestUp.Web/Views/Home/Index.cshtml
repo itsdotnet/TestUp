@@ -47,12 +47,14 @@
             
             @if (Model is null)
             {
-                <div class="sidebar-item">
-                    <img id="sideItems" src="~/images/profile_icon.svg" style="height:20px; width:20px; margin-left:10px; margin-right:16px;" />
-                    <div>
-                        Sign In
+                <form asp-action="login" asp-controller="users">
+                    <div class="sidebar-item" >
+                        <img id="sideItems" src="~/images/profile_icon.svg" style="height:20px; width:20px; margin-left:10px; margin-right:16px;" />
+                        <div>
+                            Sign Up
+                        </div>
                     </div>
-                </div>
+                </form>
             }
 
             @if (Model is not null)

@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TestUp.WebApi.Controllers;
 
-public class UsersController : BaseController
+[ApiController]
+[Route("api/[controller]")]
+public class UsersController : ControllerBase
 {
     private readonly IUserService userService;
 

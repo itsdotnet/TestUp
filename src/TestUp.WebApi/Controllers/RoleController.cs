@@ -16,7 +16,7 @@ public class RoleController : ControllerBase
     {
         this.rolesService = rolesService;
     }
-    [HttpPost("Role")]
+    [HttpPost("role")]
     public async Task<IActionResult> PostRole(UserRolle userRolle)
         => Ok(new Response
         {
