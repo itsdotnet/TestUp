@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TestUp.WebApi.Middlewares;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using TestUp.WebApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,7 @@ builder.Services.AddDbContext<TestUpDbContext>(options =>
 
 builder.Services.AddServices();
 
-//builder.Services.ConfigureSwagger();
+builder.Services.ConfigureSwagger();
 
 // Policy
 
@@ -46,6 +47,7 @@ var logger = new LoggerConfiguration()
         .CreateLogger();
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
+
 
 // Lowercase route
 
@@ -78,7 +80,6 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 
