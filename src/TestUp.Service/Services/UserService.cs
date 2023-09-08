@@ -32,18 +32,27 @@ public class UserService : IUserService
     public async Task<UserResultDto> CreateAsync(UserCreationDto dto)
     {
         dto.Username = dto.Username.Trim().ToLower();
-        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username || q.Email == q.Email);
+        var exist = await _unitOfWork.UserRepository.SelectAsync(q => q.Username == dto.Username || q.Email == dto.Email);
 
         if (exist is not null)
             throw new AlreadyExistException("User already exist with this Username");
-
+        if(dto.AttachmentId != 0)
+        {
+            var attachment = await _unitOfWork.AttachmentRepository.SelectAsync(x => x.Id == dto.AttachmentId);
+            if (attachment is null)
+                throw new NotFoundException("Attachment not found");
+        }
+        else
+        {
+            dto.AttachmentId = null;
+        }
 
         var newUser = _mapper.Map<User>(dto);
         newUser.Password = PasswordHasher.Hash(newUser.Password);
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveAsync();
 
-        return _mapper.Map<UserResultDto>(exist);
+        return _mapper.Map<UserResultDto>(newUser);
     }
 
     public async Task<bool> DeleteAsync(long id)
