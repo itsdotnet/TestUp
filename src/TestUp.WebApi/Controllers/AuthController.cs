@@ -4,6 +4,7 @@ using TestUp.Service.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using TestUp.Service.Interfaces;
 using TestUp.WebApi.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 public class AuthController : BaseController
 {
@@ -15,6 +16,7 @@ public class AuthController : BaseController
     }
 
     [HttpPost("authenticate")]
+    [AllowAnonymous]
     public async Task<IActionResult> AuthenticateAsync(string emailOrUsername, string password)
     {
         if (Validator.IsValidEmail(emailOrUsername))

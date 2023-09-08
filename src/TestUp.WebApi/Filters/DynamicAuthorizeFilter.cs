@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Npgsql.Replication.PgOutput.Messages;
 using TestUp.Service.Enums;
 
 namespace TestUp.WebApi.Filters;
@@ -15,24 +16,29 @@ public class DynamicAuthorizeFilter : IAuthorizationFilter
             context.Result = new ForbidResult();
         }
 
-        else if (userRole != RoleUser.Admin)
+        if (userRole != RoleUser.Admin)
         {
             context.Result = new ForbidResult();
         }
-
-        else if (userRole != RoleUser.Teacher)
+        else
+        {
+            return;
+        }
+        if(userRole != RoleUser.Teacher)
         {
             context.Result = new ForbidResult();
         }
-
-        else if (userRole != RoleUser.AdminTeacher)
+        else
+        {
+            return;    
+        }
+        if (userRole != RoleUser.AdminTeacher)
         {
             context.Result = new ForbidResult();
         }
-
-        else if(userRole != RoleUser.AdminUser)
+        else
         {
-            context.Result = new ForbidResult();
+            return;
         }
     }
 }
