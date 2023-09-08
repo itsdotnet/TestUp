@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
+using TestUp.WebApi.Models;
 using System.Threading.Tasks;
+using TestUp.Service.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using TestUp.Service.DTOs.Exam;
 using TestUp.Service.Interfaces;
-using TestUp.WebApi.Models;
 
 namespace TestUp.WebApi.Controllers;
 
@@ -19,21 +19,37 @@ public class ExamsController : BaseController
     [HttpPost("create")]
     //[Authorize(Policy = "TeacherPolicy")]
     public async Task<IActionResult> PostAsync(ExamCreationDto examCreation)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Succes",
-            Data = await this.examService.CreateAsync(examCreation)
-        });
+    {
+        var titleValid = Validator.IsValidText(examCreation.Title);
+        var descriptionValid = Validator.IsValidDescription(examCreation.Description);
+
+        if (titleValid && descriptionValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Succes",
+                Data = await this.examService.CreateAsync(examCreation)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpPut("update")]
     public async Task<IActionResult> PutAsync(ExamUpdateDto examUpdate)
-        => Ok(new Response
-        {
-            StatusCode = 200,
-            Message = "Succes",
-            Data = await this.examService.ModifyAsync(examUpdate)
-        });
+    {
+        var titleValid = Validator.IsValidText(examUpdate.Title);
+        var descriptionValid = Validator.IsValidDescription(examUpdate.Description);
+
+        if (titleValid && descriptionValid)
+            return Ok(new Response
+            {
+                StatusCode = 200,
+                Message = "Succes",
+                Data = await this.examService.ModifyAsync(examUpdate)
+            });
+
+        return BadRequest("Invalid information");
+    }
 
     [HttpDelete("delete/{id:long}")]
     public async Task<IActionResult> DeleteAsync(long id)
@@ -105,5 +121,14 @@ public class ExamsController : BaseController
             StatusCode = 200,
             Message = "Succes",
             Data = await this.examService.CurrentExams()
+        });
+
+    [HttpGet("serach")]
+    public async Task<IActionResult> SearchExamAsync(long id)
+        => Ok(new Response
+        {
+            StatusCode = 200,
+            Message = "Succes",
+            Data = await this.examService.SearchExamAsync(id)
         });
 }

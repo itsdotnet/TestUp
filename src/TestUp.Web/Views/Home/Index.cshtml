@@ -1,8 +1,102 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Test Up - First Online Exam Platform";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<body style="background-color: #82DBD8; color:#B3E8E5;">
+    <header class="header">
+        <button class="sidebar-btn">
+            <img src="~/images/threeline.svg" alt="logo" style="margin:auto; height:20px; width:20px;">
+        </button>
+            <a asp-action="Privacy" asp-controller="Home" method="get" style="cursor:pointer;">
+                 <img src="~/images/testuptxt.png" />
+            </a>
+
+    </header>
+    <div class="container d-flex p-0" style="width:100%; margin:0px; ">
+        <div class="sidebar">
+            <div class="sidebar-item">
+                <img id="sideItems" src="~/images/profile_icon.svg" style="height:20px; width:20px; margin-left:10px; margin-right:10px;" />
+                Sign In
+            </div>
+            <div class="sidebar-item">iskandar</div>
+            <div class="sidebar-item">iskandar</div>
+            <div class="sidebar-item">iskandar</div>
+            <div class="sidebar-item">iskandar</div>
+        </div>
+        <div class="content">
+            <p>kodirov</p>
+        </div>
+    </div>
+</body>
+
+<style>
+    .header{
+        background-color: #3BACB6;
+        display:flex;
+        width:100vw;
+        margin-right:auto;
+        margin-left:auto;
+        height:79px;
+        align-items:center;
+    }
+
+    .sidebar{
+        align-items: center;
+        flex:2;
+        height:100vw;
+        border-right: 2px solid #3BACB6;
+    }
+
+    .sidebar-item{
+        align-items: center;
+        justify-content: flex-start;
+        padding-top:2px;
+        padding-bottom:2px;
+        font-size: 20px;
+        line-height: 1.231;
+        display: flex;
+        cursor: pointer;
+        text-decoration: none;
+        padding-left: 2px;
+        padding-right: 2px;
+        margin: 2px 0;
+        border-radius: 6px;
+        max-width: 100%;
+        transition: 0.3s;
+        width:100%;
+        height:40px;
+    }
+
+    .sidebar-item:hover{
+            background-color: #3BACB6;
+    }
+
+    .sidebar-btn{
+        background-color: #3BACB6;
+        padding: 6px !important;
+        margin-right: 16px;
+        margin-left: 16px;
+        width: 36px;
+        height: 36px !important;
+        font-size: inherit;
+        font-weight: inherit;
+        text-decoration: inherit;
+        line-height: normal;
+        outline: inherit;
+        white-space: normal;
+        text-overflow: inherit;
+        overflow: visible;
+        border-radius: 4px !important;
+        border:none;
+        transition: 0.3s;
+    }
+
+    .sidebar-btn:hover {
+        background-color: #2F8F9D;
+    }
+
+    .content{
+        flex: 8;
+        height: 100vw;
+    }
+</style>
