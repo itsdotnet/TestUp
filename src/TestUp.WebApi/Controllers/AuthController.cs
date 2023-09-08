@@ -6,7 +6,11 @@ using TestUp.Service.Interfaces;
 using TestUp.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 
-public class AuthController : BaseController
+namespace TestUp.WebApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
 {
     private readonly IAuthService authService;
 
