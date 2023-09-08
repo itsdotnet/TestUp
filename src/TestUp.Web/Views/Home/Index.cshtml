@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Test Up - First Online Exam Platform";
+}
+
+<body style="background-color:#1a202c; color:#e2e8f0;">
+    <header class="header">
+        <button class="sidebar-btn">
+            <img src="~/images/threeline.svg" alt="logo" style="margin:auto; height:20px; width:20px;">
+        </button>
+            <a asp-action="Privacy" asp-controller="Home" method="get" style="cursor:pointer;">
+                 <img src="~/images/testuptxt.png" />
+            </a>
+
+    </header>
+    <div class="container d-flex p-0" style="width:100%; margin:0px; ">
+        <div class="sidebar">
+            <div class="sidebar-item">
+                <!--exam icon-->
+                <div>
+                    Exams
+                </div>    
+            </div>
+            <div class="sidebar-item">
+                <!--scores icon-->
+                <div>
+                    Scores
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <img src="~/images/settings.svg" alt="logo" style="margin:auto; height:20px; width:20px; width:20px; margin-left:10px; margin-right:16px;">
+                <div>
+                    Settings    
+                </div>
+            </div>
+            
+            <hr class="v-line"/>
+            
+            @if (Model is null)
+            {
+                <div class="sidebar-item">
+                    <img id="sideItems" src="~/images/profile_icon.svg" style="height:20px; width:20px; margin-left:10px; margin-right:16px;" />
+                    <div>
+                        Sign In
+                    </div>
+                </div>
+            }
+
+            @if (Model is not null)
+            {
+                <div class="sidebar-item">
+                    <div>
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" style="margin-left:10px; margin-right:10px;" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 8L22 12M22 12L18 16M22 12H9M15 4.20404C13.7252 3.43827 12.2452 3 10.6667 3C5.8802 3 2 7.02944 2 12C2 16.9706 5.8802 21 10.6667 21C12.2452 21 13.7252 20.5617 15 19.796" stroke="#c6f5f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Log out
+                    </div>
+                </div>
+            }
+            
+        </div>
+        <div class="content">
+            <p>kodirov</p>
+        </div>
+    </div>
+</body>
+
+<style>
+    .header{
+        border-bottom: 1px solid;
+        border-color:white;
+        background-color: #171923;
+        display:flex;
+        width:100vw;
+        margin-right:auto;
+        margin-left:auto;
+        height:79px;
+        align-items:center;
+    }
+
+    .sidebar{
+        background-color: #171923;
+        align-items: center;
+        color: #c6f5f2;
+        flex:2;
+        height:100vw;
+        border-right: 1px solid white;
+    }
+
+    .sidebar-item{
+        align-items: center;
+        justify-content: flex-start;
+        padding-top:2px;
+        padding-bottom:2px;
+        font-size: 20px;
+        line-height: 1.231;
+        display: flex;
+        cursor: pointer;
+        text-decoration: none;
+        padding-left: 2px;
+        padding-right: 2px;
+        margin: 2px 0;
+        border-radius: 6px;
+        max-width: 100%;
+        transition: 0.3s;
+        width:100%;
+        height:40px;
+    }
+
+    .sidebar-item:hover{
+            background-color: #3BACB6;
+    }
+
+    .sidebar-btn{
+        background-color: #1a202c;
+        padding: 6px !important;
+        margin-right: 16px;
+        margin-left: 16px;
+        width: 36px;
+        height: 36px !important;
+        font-size: inherit;
+        font-weight: inherit;
+        text-decoration: inherit;
+        line-height: normal;
+        outline: inherit;
+        white-space: normal;
+        text-overflow: inherit;
+        overflow: visible;
+        border-radius: 4px !important;
+        border:none;
+        transition: 0.3s;
+    }
+
+    .content{
+        flex: 8;
+        height: 100vw;
+    }
+
+    .v-line{
+        border:solid 1px;
+        color : #2F8F9D;
+        margin-top:1px;
+        margin-bottom:1px;
+    }
+</style>
