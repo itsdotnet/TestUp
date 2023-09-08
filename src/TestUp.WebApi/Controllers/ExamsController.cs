@@ -17,7 +17,7 @@ public class ExamsController : BaseController
     }
 
     [HttpPost("create")]
-    [Authorize(Policy = "TeacherPolicy")]
+    //[Authorize(Policy = "TeacherPolicy")]
     public async Task<IActionResult> PostAsync(ExamCreationDto examCreation)
         => Ok(new Response
         {

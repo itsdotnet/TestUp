@@ -23,6 +23,8 @@ builder.Services.AddDbContext<TestUpDbContext>(options =>
 
 builder.Services.AddServices();
 
+//builder.Services.ConfigureSwagger();
+
 // Policy
 
 builder.Services.AddAuthorization(options =>

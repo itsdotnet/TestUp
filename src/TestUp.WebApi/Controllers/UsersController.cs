@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TestUp.Service.DTOs.User;
 using TestUp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace TestUp.WebApi.Controllers;
 
@@ -51,6 +53,7 @@ public class UsersController : BaseController
             Data = await this.userService.GetByIdAsync(id)
         });
 
+    [Authorize(Roles = "User")]
     [HttpGet("get-all")]
     public async Task<IActionResult> GetAllAsync()
         => Ok(new Response
