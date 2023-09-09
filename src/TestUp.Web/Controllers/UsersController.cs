@@ -10,4 +10,11 @@ public class UsersController : Controller
         var model = new LoginView();
         return View(model);
     }
+
+    [HttpPost]
+    public IActionResult Login(LoginView loginModel)
+    {
+        //login with auth
+        return View();
+    }
 }
