@@ -28,7 +28,10 @@ public class AnswersController : BaseController
                 Data = await this.answerService.CreateAsync(dto)
             });
 
-        return BadRequest("Invalid text");
+        return BadRequest(new Response{
+            StatusCode = 400,
+            Message = "Invalid text",
+        });
     }
 
     [HttpPut("update")]
@@ -43,7 +46,11 @@ public class AnswersController : BaseController
                 Data = await this.answerService.ModifyAsync(dto)
             });
 
-        return BadRequest("Invalid text");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Invalid text",
+        });
     }
 
     [HttpDelete("delete/{id:long}")]
