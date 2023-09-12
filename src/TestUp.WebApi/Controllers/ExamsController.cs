@@ -17,7 +17,6 @@ public class ExamsController : BaseController
     }
 
     [HttpPost("create")]
-    //[Authorize(Policy = "TeacherPolicy")]
     public async Task<IActionResult> PostAsync(ExamCreationDto examCreation)
     {
         var titleValid = Validator.IsValidText(examCreation.Title);
@@ -31,7 +30,11 @@ public class ExamsController : BaseController
                 Data = await this.examService.CreateAsync(examCreation)
             });
 
-        return BadRequest("Invalid information");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Invalid information",
+        });
     }
 
     [HttpPut("update")]
@@ -48,7 +51,11 @@ public class ExamsController : BaseController
                 Data = await this.examService.ModifyAsync(examUpdate)
             });
 
-        return BadRequest("Invalid information");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Invalid information",
+        });
     }
 
     [HttpDelete("delete/{id:long}")]
