@@ -42,6 +42,10 @@ public class AuthController : ControllerBase
             });
         }
 
-        return BadRequest("Username or password is incorrect");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Username or password is incorrect",
+        }); 
     }
 }
