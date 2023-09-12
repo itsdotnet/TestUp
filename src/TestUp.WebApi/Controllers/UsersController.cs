@@ -37,7 +37,11 @@ public class UsersController : ControllerBase
                 Data = await this.userService.CreateAsync(dto)
             });
 
-        return BadRequest("Invalid information");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Invalid Information",
+        });
     }
 
     [HttpPut("update")]
@@ -55,7 +59,11 @@ public class UsersController : ControllerBase
                 Data = await this.userService.ModifyAsync(dto)
             });
 
-        return BadRequest("Invalid information");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Invalid Information",
+        });
     }
 
     [HttpDelete("delete/{id:long}")]
