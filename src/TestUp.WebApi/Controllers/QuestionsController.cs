@@ -31,8 +31,11 @@ public class QuestionsController : BaseController
                 Message = "Success",
                 Data = await this.questionService.CreateAsync(dto)
             });
-
-        return BadRequest("Title or Description invalid");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Title or Description invalid",
+        });
     }
 
     [HttpPut("update")]
@@ -49,7 +52,11 @@ public class QuestionsController : BaseController
                 Data = await this.questionService.ModifyAsync(dto)
             });
 
-        return BadRequest("Title or Description invalid");
+        return BadRequest(new Response
+        {
+            StatusCode = 400,
+            Message = "Title or Description invalid",
+        });
     }
 
     [HttpDelete("delete/{id:long}")]
